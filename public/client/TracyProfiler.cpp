@@ -3122,11 +3122,11 @@ char* Profiler::SafeCopyProlog( const char* data, size_t size )
     if( size > SafeSendBufferSize ) buf = (char*)tracy_malloc( size );
 
 #ifdef _WIN32
-    __try
+    try
     {
         memcpy( buf, data, size );
     }
-    __except( 1 /*EXCEPTION_EXECUTE_HANDLER*/ )
+    catch(std::exception& e)
     {
         success = false;
     }
