@@ -1511,7 +1511,7 @@ void Profiler::InstallCrashHandler()
 #if defined _WIN32 && !defined TRACY_UWP && !defined TRACY_NO_CRASH_HANDLER
     // We cannot use Vectored Exception handling because it catches application-wide frame-based SEH blocks. We only
     // want to catch unhandled exceptions.
-    m_prevHandler = SetUnhandledExceptionFilter( CrashFilter );
+    m_prevHandler = (void*)SetUnhandledExceptionFilter( CrashFilter );
 #endif
 
 #ifndef TRACY_NO_CRASH_HANDLER
